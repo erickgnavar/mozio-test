@@ -51,3 +51,7 @@ class Provider(TimeStampedModel):
     def generate_token(self):
         self.token = secrets.token_hex()
         self.save()
+
+    @property
+    def owner(self):
+        return self

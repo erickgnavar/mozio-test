@@ -5,7 +5,7 @@ from mixer.backend.django import mixer
 from ..models import Provider
 
 
-class UserTestCase(TestCase):
+class ProviderTestCase(TestCase):
 
     def test_str(self):
         provider = Provider(name='test')

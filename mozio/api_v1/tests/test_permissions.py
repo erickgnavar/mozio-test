@@ -2,15 +2,15 @@ from django.test import TestCase
 from mixer.backend.django import mixer
 from rest_framework.test import APIRequestFactory
 
-from ..permissions import SameProviderPermission
+from ..permissions import IsOwnerOrReadOnly
 
 
-class SameProviderPermissionTestCase(TestCase):
+class IsOwnerOrReadOnlyTestCase(TestCase):
 
     def setUp(self):
         self.factory = APIRequestFactory()
         self.provider = mixer.blend('providers.Provider')
-        self.permission = SameProviderPermission()
+        self.permission = IsOwnerOrReadOnly()
 
     def test_allows_for_safe_methods(self):
         request = self.factory.get('/')

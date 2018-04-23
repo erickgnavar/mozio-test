@@ -44,11 +44,13 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework',
+    'rest_framework_gis',
 ]
 
 LOCAL_APPS = [
     'mozio.users',
     'mozio.providers',
+    'mozio.areas',
     'mozio.api_v1',
 ]
 

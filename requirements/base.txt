@@ -4,3 +4,4 @@ django-model-utils==3.1.1
 python-dateutil==2.6.1
 djangorestframework==3.8.2
 pycountry==18.2.23
+djangorestframework-gis==0.12

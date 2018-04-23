@@ -1,10 +1,10 @@
 from rest_framework import permissions
 
 
-class SameProviderPermission(permissions.BasePermission):
+class IsOwnerOrReadOnly(permissions.BasePermission):
     """
-    Check if the current provider is the owner of the resource
-    Only apply for the /providers/ endpoint
+    Object-level permission to only allow owners of an object to edit it.
+    Assumes the model instance has an `owner` attribute.
     """
 
     def has_object_permission(self, request, view, obj):
@@ -14,4 +14,4 @@ class SameProviderPermission(permissions.BasePermission):
             return True
 
         # Using ProviderTokenAuthentication the request.user object is an instance of Provider
-        return obj == request.user
+        return obj.owner == request.user
