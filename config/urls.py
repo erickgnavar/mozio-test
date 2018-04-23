@@ -14,11 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 admin.site.site_title = 'Mozio'
 admin.site.site_header = 'Mozio'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/v1/', include('mozio.api_v1.urls', namespace='api-v1')),
 ]
