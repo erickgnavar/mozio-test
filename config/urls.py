@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework.documentation import include_docs_urls
 
 admin.site.site_title = 'Mozio'
 admin.site.site_header = 'Mozio'
@@ -22,4 +23,13 @@ admin.site.site_header = 'Mozio'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('mozio.api_v1.urls', namespace='api-v1')),
+    path(
+        'api/v1/docs/',
+        include_docs_urls(
+            title='Mozio',
+            authentication_classes=tuple(),
+            permission_classes=tuple(),
+            public=False,
+        ),
+    ),
 ]
