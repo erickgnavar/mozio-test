@@ -1,9 +1,10 @@
+from django.contrib.gis.geos import Point
 from rest_framework import generics
 
 from mozio.areas.models import ServiceArea
 from mozio.providers.models import Provider
 
-from . import permissions, serializers
+from . import forms, permissions, serializers
 from .authentication import ProviderTokenAuthentication
 
 
@@ -38,7 +39,12 @@ class ServiceAreaListCreateView(generics.ListCreateAPIView):
     serializer_class = serializers.ServiceAreaSerializer
 
     def get_queryset(self):
-        return ServiceArea.objects.select_related('provider')
+        qs = ServiceArea.objects.select_related('provider')
+        form = forms.ServiceAreaForm(self.request.GET)
+        if form.is_valid():
+            point = Point(form.cleaned_data['lng'], form.cleaned_data['lat'])
+            qs = qs.filter(polygon__contains=point)
+        return qs
 
     @property
     def authentication_classes(self):
