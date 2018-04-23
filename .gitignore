@@ -148,4 +148,5 @@ Temporary Items
 # Project files
 .envrc
 /static
+/staticfiles
 media
